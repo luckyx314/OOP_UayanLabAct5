@@ -8,7 +8,7 @@ public class LeapYearTestDrive {
         LeapYearGUI app = new LeapYearGUI();
         app.setContentPane(app.getPnlMain());
         app.setTitle("Leap Year Checker");
-        app.setSize(300, 300);
+        app.setSize(300, 250);
         app.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         app.setVisible(true);
     }
