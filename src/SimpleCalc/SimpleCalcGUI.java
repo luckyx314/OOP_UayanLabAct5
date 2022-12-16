@@ -2,9 +2,15 @@ package SimpleCalc;
 
 import javax.swing.*;
 
-public class SimpleCalcGUI {
-    private JPanel panel1;
-    private JTextField textField1;
-    private JComboBox comboBox1;
-    private JButton computeResultButton;
+public class SimpleCalcGUI extends JFrame{
+    private JPanel calcPanel;
+    private JTextField tfNumber1;
+    private JComboBox cbOperations;
+    private JButton btnCompute;
+    private JTextField tfNumber2;
+    private JTextField lbResult;
+
+    public JPanel getCalcPanel() {
+        return calcPanel;
+    }
 }
