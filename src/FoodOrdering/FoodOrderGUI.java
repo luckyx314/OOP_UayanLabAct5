@@ -80,9 +80,13 @@ public class FoodOrderGUI extends JFrame{
                         totalPrice -= (totalPrice * .10);
                     else if (rb15.isSelected())
                         totalPrice -= (totalPrice * .15);
-                    else if (!rbNone.isSelected()) {
+                    else if (!rbNone.isSelected() || rbNone.isSelected()) {
                         result = JOptionPane.showConfirmDialog(foodOrderingPanel, "You have not selected a discount option. Do you wish to continue?");
-                        if (result == JOptionPane.NO_OPTION || result == JOptionPane.CANCEL_OPTION)
+                        if (
+                                result == JOptionPane.NO_OPTION ||
+                                result == JOptionPane.CANCEL_OPTION ||
+                                result == JOptionPane.CLOSED_OPTION
+                        )
                             withDiscount = false;
                     }
 
