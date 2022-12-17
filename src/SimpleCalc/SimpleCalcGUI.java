@@ -12,6 +12,13 @@ class NumberTooLarge extends Exception {
     }
 }
 
+class EmptyInputException extends Exception {
+    @Override
+    public String getMessage() {
+        return "Inputted numbers cannot be empty.\nPlease enter a valid number. Try again!";
+    }
+}
+
 public class SimpleCalcGUI extends JFrame{
     private JPanel calcPanel;
     private JTextField tfNumber1;
@@ -26,12 +33,16 @@ public class SimpleCalcGUI extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
+                    if (tfNumber1.getText().equals("") || tfNumber2.getText().equals(""))
+                        throw new EmptyInputException();
+
                     String operation = (String) cbOperations.getSelectedItem();
-                    double n1 = Integer.parseInt(tfNumber1.getText());
-                    double n2 = Integer.parseInt(tfNumber2.getText());
+                    double n1 = Double.parseDouble(tfNumber1.getText());
+                    double n2 = Double.parseDouble(tfNumber2.getText());
                     double res = 0;
 
-                    if (n1 >= 999999999 || n2 >= 999999999)
+                    // 2^63 - 1
+                    if (n1 >= Long.MAX_VALUE || n2 >= Long.MAX_VALUE)
                         throw new NumberTooLarge();
 
                     switch (Objects.requireNonNull(operation)) {
@@ -62,6 +73,8 @@ public class SimpleCalcGUI extends JFrame{
                     JOptionPane.showMessageDialog(calcPanel, "Invalid input. Please enter a valid number.");
                 } catch (ArithmeticException err) {
                     JOptionPane.showMessageDialog(calcPanel, "Cannot divide a number by zero. Try again!");
+                } catch (EmptyInputException err) {
+                    JOptionPane.showMessageDialog(calcPanel, err.getMessage());
                 }
             }
         });
