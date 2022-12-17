@@ -3,6 +3,8 @@ package FoodOrdering;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 
 class NoOrderException extends Exception {
@@ -32,6 +34,15 @@ public class FoodOrderGUI extends JFrame{
         rbGroup.add(rb10);
         rbGroup.add(rb15);
         rbGroup.add(rbNone);
+
+        List<JCheckBox> checkBoxes = new ArrayList<>();
+        checkBoxes.add(cPizza);
+        checkBoxes.add(cBurger);
+        checkBoxes.add(cFries);
+        checkBoxes.add(cSoftDrinks);
+        checkBoxes.add(cTea);
+        checkBoxes.add(cSundae);
+
         btnOrder.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -40,17 +51,24 @@ public class FoodOrderGUI extends JFrame{
                 try {
                     if (cPizza.isSelected())
                         totalPrice += 100;
-                    else if (cBurger.isSelected())
+                    if (cBurger.isSelected())
                         totalPrice+=80;
-                    else if (cFries.isSelected())
+                    if (cFries.isSelected())
                         totalPrice+=65;
-                    else if (cSoftDrinks.isSelected())
+                    if (cSoftDrinks.isSelected())
                         totalPrice+=55;
-                    else if (cTea.isSelected())
+                    if (cTea.isSelected())
                         totalPrice+=50;
-                    else if (cSundae.isSelected())
+                    if (cSundae.isSelected())
                         totalPrice+=40;
-                    else
+
+                    int ctr = 0;
+                    for (JCheckBox cbox : checkBoxes) {
+                        if (cbox.isSelected())
+                            ctr++;
+                    }
+
+                    if (ctr == 0)
                         throw new NoOrderException();
 
                     int result = JOptionPane.NO_OPTION;
